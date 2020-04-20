@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/dialogtxt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Enter Your name" />
+
+    <TextView
+        android:id="@+id/dialogtxt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialogtxt1"
+        android:layout_marginStart="-107dp"
+        android:layout_marginTop="47dp"
+        android:layout_toEndOf="@id/dialogtxt1"
+        android:text="@string/entercontex" />
+
+    <EditText
+        android:id="@+id/dialogeditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_toEndOf="@+id/dialogtxt1"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/dialogeditText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogeditText"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="34dp"
+        android:layout_toEndOf="@id/dialogtxt2"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+
+</RelativeLayout>

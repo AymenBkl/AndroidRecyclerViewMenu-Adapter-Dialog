@@ -3,11 +3,12 @@ package com.example.tp.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -69,6 +70,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
             header = (TextView) viewHolder.findViewById(R.id.user);
             context = (TextView) viewHolder.findViewById(R.id.subject);
             viewHolder.setOnLongClickListener(this);
+            FadeAnimation(viewHolder);
         }
         public void BindView(int position){
             header.setText(myitems.get(position).getHeader());
@@ -92,6 +94,11 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
 
 
             return true;
+        }
+        private void FadeAnimation(View view) {
+            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            anim.setDuration(1000);
+            view.startAnimation(anim);
         }
     }
 }

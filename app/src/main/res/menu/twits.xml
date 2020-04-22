@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         app:showAsAction="ifRoom"
-        android:icon="@drawable/zawach"
+        android:icon="@drawable/bird"
         android:id="@+id/zawach"/>
 </menu>

@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.tp.Model.Item;
-import com.example.tp.MyFragment;
+import com.example.tp.Fragments.MyFragment;
 import com.example.tp.R;
 import com.example.tp.SharedPrefrences.SharedPreference;
 

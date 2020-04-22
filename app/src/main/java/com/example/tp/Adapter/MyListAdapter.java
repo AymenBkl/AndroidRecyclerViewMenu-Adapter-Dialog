@@ -3,6 +3,7 @@ package com.example.tp.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tp.Activities.MainActivity;
 import com.example.tp.Model.Item;
 import com.example.tp.R;
 import com.example.tp.SharedPrefrences.SharedPreference;
@@ -25,10 +27,13 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
     private List<Item> myitems;
     private SharedPreference sharedPreference;
     private Context contexts;
+    private MainActivity listner;
+    private int clicked,longclicked;
     public MyListAdapter(List<Item> items,Context context){
         this.myitems = items;
         this.contexts = context;
         sharedPreference = new SharedPreference();
+        this.listner = (MainActivity) context;
     }
     @NonNull
     @Override
@@ -41,8 +46,6 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.BindView(position);
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -57,8 +60,11 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
         this.myitems.remove(position);
         this.notifyItemRemoved(position);
         sharedPreference.removeItem(contexts,position);
+        if (longclicked==clicked){
+            listner.RemovedItem();
+        }
     }
-    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener {
         public TextView header;
         public TextView context;
 
@@ -66,10 +72,11 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
             super(viewHolder);
             Assign(viewHolder);
         }
-        public void Assign(View viewHolder){
+        private void Assign(View viewHolder){
             header = (TextView) viewHolder.findViewById(R.id.user);
             context = (TextView) viewHolder.findViewById(R.id.subject);
             viewHolder.setOnLongClickListener(this);
+            viewHolder.setOnClickListener(this);
             FadeAnimation(viewHolder);
         }
         public void BindView(int position){
@@ -86,6 +93,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             int position = getAdapterPosition();
+                            longclicked = position;
                             RemoveItem(position);
                             dialog.dismiss();
                         }
@@ -95,10 +103,15 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ListViewHo
 
             return true;
         }
+        public void onClick(View view){
+            int position = getAdapterPosition();
+            clicked = position;
+            listner.SetFragment(myitems.get(position));
+        }
         private void FadeAnimation(View view) {
             ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setDuration(1000);
-            view.startAnimation(anim);
+            anim.setDuration(1500);
+            view.setAnimation(anim);
         }
     }
 }
